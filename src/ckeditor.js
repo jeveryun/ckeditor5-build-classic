@@ -11,6 +11,11 @@ import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapte
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
+import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
+import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
+import Code from '@ckeditor/ckeditor5-basic-styles/src/code';
+import Subscript from '@ckeditor/ckeditor5-basic-styles/src/subscript';
+import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
 import EasyImage from '@ckeditor/ckeditor5-easy-image/src/easyimage';
@@ -21,6 +26,7 @@ import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
 import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
 import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
+import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import List from '@ckeditor/ckeditor5-list/src/list';
 import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
@@ -28,9 +34,38 @@ import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
+import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
+import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperties';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 
-import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock'
+import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
+import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
+import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters';
+import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/src/specialcharactersessentials';
+
+function SpecialCharactersEmoji(editor) {
+	editor.plugins.get('SpecialCharacters').addItems('Emoji', [{
+			title: 'smiley face',
+			character: '😊'
+		},
+		{
+			title: 'rocket',
+			character: '🚀'
+		},
+		{
+			title: 'wind blowing face',
+			character: '🌬️'
+		},
+		{
+			title: 'floppy disk',
+			character: '💾'
+		},
+		{
+			title: 'heart',
+			character: '❤️'
+		}
+	]);
+}
 
 export default class ClassicEditor extends ClassicEditorBase {}
 
@@ -39,8 +74,7 @@ ClassicEditor.builtinPlugins = [
 	Essentials,
 	UploadAdapter,
 	Autoformat,
-	Bold,
-	Italic,
+	Bold, Italic, Underline, Strikethrough, Code, Subscript, Superscript,
 	BlockQuote,
 	CKFinder,
 	EasyImage,
@@ -51,25 +85,27 @@ ClassicEditor.builtinPlugins = [
 	ImageToolbar,
 	ImageUpload,
 	Indent,
+	IndentBlock,
 	Link,
 	List,
 	MediaEmbed,
 	Paragraph,
 	PasteFromOffice,
-	Table,
-	TableToolbar,
+	Table, TableToolbar, TableProperties, TableCellProperties,
 	TextTransformation,
-	CodeBlock
+	CodeBlock,
+	RemoveFormat,
+	SpecialCharacters, SpecialCharactersEssentials, SpecialCharactersEmoji,
 ];
 
 // Editor configuration.
 ClassicEditor.defaultConfig = {
 	toolbar: {
 		items: [
+			'removeFormat',
 			'heading',
 			'|',
-			'bold',
-			'italic',
+			'bold', 'italic', 'underline', 'strikethrough', 'code', 'subscript', 'superscript',
 			'link',
 			'bulletedList',
 			'numberedList',
@@ -77,89 +113,86 @@ ClassicEditor.defaultConfig = {
 			'indent',
 			'outdent',
 			'|',
+			'specialCharacters',
 			'imageUpload',
 			'blockQuote',
 			'codeBlock',
 			'insertTable',
 			'mediaEmbed',
 			'undo',
-			'redo'
-		]
+			'redo',
+		],
 	},
 	image: {
 		toolbar: [
 			'imageStyle:full',
 			'imageStyle:side',
 			'|',
-			'imageTextAlternative'
-		]
+			'imageTextAlternative',
+		],
 	},
 	table: {
-		contentToolbar: [
-			'tableColumn',
-			'tableRow',
-			'mergeTableCells'
-		]
+		contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties'],
 	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	language: 'zh-cn',
 	codeBlock: {
 		languages: [{
 				language: 'plaintext',
-				label: 'Plain text'
+				label: 'Plain text',
 			}, // The default language.
 			{
 				language: 'c',
-				label: 'C'
+				label: 'C',
 			},
 			{
 				language: 'cs',
-				label: 'C#'
+				label: 'C#',
 			},
 			{
 				language: 'cpp',
-				label: 'C++'
+				label: 'C++',
 			},
 			{
 				language: 'css',
-				label: 'CSS'
+				label: 'CSS',
 			},
 			{
 				language: 'diff',
-				label: 'Diff'
+				label: 'Diff',
 			},
 			{
 				language: 'html',
-				label: 'HTML'
+				label: 'HTML',
 			},
 			{
 				language: 'java',
-				label: 'Java'
+				label: 'Java',
 			},
 			{
 				language: 'javascript',
-				label: 'JavaScript'
+				label: 'JavaScript',
 			},
 			{
 				language: 'php',
-				label: 'PHP'
+				label: 'PHP',
 			},
 			{
 				language: 'python',
-				label: 'Python'
+				label: 'Python',
 			},
 			{
 				language: 'ruby',
-				label: 'Ruby'
+				label: 'Ruby',
 			},
 			{
 				language: 'typescript',
-				label: 'TypeScript'
+				label: 'TypeScript',
 			},
 			{
 				language: 'xml',
-				label: 'XML'
-			}
+				label: 'XML',
+			},
 		],
 	},
 };

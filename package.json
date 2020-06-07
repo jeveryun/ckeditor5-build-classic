@@ -27,7 +27,7 @@
   "devDependencies": {
     "@ckeditor/ckeditor5-adapter-ckfinder": "^19.0.0",
     "@ckeditor/ckeditor5-autoformat": "^19.0.0",
-    "@ckeditor/ckeditor5-basic-styles": "^19.0.0",
+    "@ckeditor/ckeditor5-basic-styles": "^19.0.1",
     "@ckeditor/ckeditor5-block-quote": "^19.0.0",
     "@ckeditor/ckeditor5-ckfinder": "^19.0.0",
     "@ckeditor/ckeditor5-code-block": "^19.0.1",
@@ -39,7 +39,7 @@
     "@ckeditor/ckeditor5-essentials": "^19.0.0",
     "@ckeditor/ckeditor5-heading": "^19.0.0",
     "@ckeditor/ckeditor5-image": "^19.0.0",
-    "@ckeditor/ckeditor5-indent": "^19.0.0",
+    "@ckeditor/ckeditor5-indent": "^19.0.1",
     "@ckeditor/ckeditor5-link": "^19.0.0",
     "@ckeditor/ckeditor5-list": "^19.0.0",
     "@ckeditor/ckeditor5-media-embed": "^19.0.0",
@@ -95,5 +95,9 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "dependencies": {
+    "@ckeditor/ckeditor5-remove-format": "^19.0.1",
+    "@ckeditor/ckeditor5-special-characters": "^19.0.1"
   }
 }
