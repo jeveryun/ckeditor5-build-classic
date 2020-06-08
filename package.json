@@ -97,6 +97,8 @@
     }
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-font": "^19.0.1",
+    "@ckeditor/ckeditor5-image": "^19.0.1",
     "@ckeditor/ckeditor5-remove-format": "^19.0.1",
     "@ckeditor/ckeditor5-special-characters": "^19.0.1"
   }

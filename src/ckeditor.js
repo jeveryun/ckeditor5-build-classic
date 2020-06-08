@@ -1,11 +1,4 @@
-/**
- * @license Copyright (c) 2003-2020, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
- */
-
-// The editor creator to use.
 import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
-
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
@@ -25,6 +18,7 @@ import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
 import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
 import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
 import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
+import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
 import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
 import Link from '@ckeditor/ckeditor5-link/src/link';
@@ -42,32 +36,33 @@ import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
 import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
 import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters';
 import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/src/specialcharactersessentials';
+import Font from '@ckeditor/ckeditor5-font/src/font';
 
-function SpecialCharactersEmoji(editor) {
+function SpecialCharactersEmoji (editor) {
 	editor.plugins.get('SpecialCharacters').addItems('Emoji', [{
-			title: 'smiley face',
-			character: '😊'
-		},
-		{
-			title: 'rocket',
-			character: '🚀'
-		},
-		{
-			title: 'wind blowing face',
-			character: '🌬️'
-		},
-		{
-			title: 'floppy disk',
-			character: '💾'
-		},
-		{
-			title: 'heart',
-			character: '❤️'
-		}
+		title: 'smiley face',
+		character: '😊'
+	},
+	{
+		title: 'rocket',
+		character: '🚀'
+	},
+	{
+		title: 'wind blowing face',
+		character: '🌬️'
+	},
+	{
+		title: 'floppy disk',
+		character: '💾'
+	},
+	{
+		title: 'heart',
+		character: '❤️'
+	}
 	]);
 }
 
-export default class ClassicEditor extends ClassicEditorBase {}
+export default class ClassicEditor extends ClassicEditorBase { }
 
 // Plugins to include in the build.
 ClassicEditor.builtinPlugins = [
@@ -78,12 +73,9 @@ ClassicEditor.builtinPlugins = [
 	BlockQuote,
 	CKFinder,
 	EasyImage,
+	Font,
 	Heading,
-	Image,
-	ImageCaption,
-	ImageStyle,
-	ImageToolbar,
-	ImageUpload,
+	Image, ImageCaption, ImageStyle, ImageToolbar, ImageUpload, ImageResize,
 	Indent,
 	IndentBlock,
 	Link,
@@ -95,7 +87,7 @@ ClassicEditor.builtinPlugins = [
 	TextTransformation,
 	CodeBlock,
 	RemoveFormat,
-	SpecialCharacters, SpecialCharactersEssentials, SpecialCharactersEmoji,
+	SpecialCharacters, SpecialCharactersEssentials, SpecialCharactersEmoji
 ];
 
 // Editor configuration.
@@ -109,90 +101,80 @@ ClassicEditor.defaultConfig = {
 			'link',
 			'bulletedList',
 			'numberedList',
-			'|',
-			'indent',
-			'outdent',
-			'|',
-			'specialCharacters',
-			'imageUpload',
-			'blockQuote',
-			'codeBlock',
-			'insertTable',
-			'mediaEmbed',
-			'undo',
-			'redo',
-		],
+			'|', 'indent', 'outdent',
+			'|', 'specialCharacters', 'imageUpload', 'blockQuote', 'codeBlock', 'insertTable', 'mediaEmbed', 'undo', 'redo'
+		]
 	},
 	image: {
 		toolbar: [
 			'imageStyle:full',
 			'imageStyle:side',
 			'|',
-			'imageTextAlternative',
-		],
+			'imageTextAlternative'
+		]
 	},
 	table: {
-		contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties'],
+		contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties']
 	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	language: 'zh-cn',
 	codeBlock: {
 		languages: [{
-				language: 'plaintext',
-				label: 'Plain text',
-			}, // The default language.
-			{
-				language: 'c',
-				label: 'C',
-			},
-			{
-				language: 'cs',
-				label: 'C#',
-			},
-			{
-				language: 'cpp',
-				label: 'C++',
-			},
-			{
-				language: 'css',
-				label: 'CSS',
-			},
-			{
-				language: 'diff',
-				label: 'Diff',
-			},
-			{
-				language: 'html',
-				label: 'HTML',
-			},
-			{
-				language: 'java',
-				label: 'Java',
-			},
-			{
-				language: 'javascript',
-				label: 'JavaScript',
-			},
-			{
-				language: 'php',
-				label: 'PHP',
-			},
-			{
-				language: 'python',
-				label: 'Python',
-			},
-			{
-				language: 'ruby',
-				label: 'Ruby',
-			},
-			{
-				language: 'typescript',
-				label: 'TypeScript',
-			},
-			{
-				language: 'xml',
-				label: 'XML',
-			},
-		],
-	},
+			language: 'plaintext',
+			label: 'Plain text'
+		}, // The default language.
+		{
+			language: 'c',
+			label: 'C'
+		},
+		{
+			language: 'cs',
+			label: 'C#'
+		},
+		{
+			language: 'cpp',
+			label: 'C++'
+		},
+		{
+			language: 'css',
+			label: 'CSS'
+		},
+		{
+			language: 'diff',
+			label: 'Diff'
+		},
+		{
+			language: 'html',
+			label: 'HTML'
+		},
+		{
+			language: 'java',
+			label: 'Java'
+		},
+		{
+			language: 'javascript',
+			label: 'JavaScript'
+		},
+		{
+			language: 'php',
+			label: 'PHP'
+		},
+		{
+			language: 'python',
+			label: 'Python'
+		},
+		{
+			language: 'ruby',
+			label: 'Ruby'
+		},
+		{
+			language: 'typescript',
+			label: 'TypeScript'
+		},
+		{
+			language: 'xml',
+			label: 'XML'
+		}
+		]
+	}
 };
