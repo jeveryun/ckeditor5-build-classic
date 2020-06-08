@@ -96,6 +96,7 @@ ClassicEditor.defaultConfig = {
 		items: [
 			'removeFormat',
 			'heading',
+			'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor',
 			'|',
 			'bold', 'italic', 'underline', 'strikethrough', 'code', 'subscript', 'superscript',
 			'link',
