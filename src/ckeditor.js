@@ -68,6 +68,7 @@ export default class ClassicEditor extends ClassicEditorBase { }
 ClassicEditor.builtinPlugins = [
 	Essentials,
 	UploadAdapter,
+	Autoformat,
 	Bold, Italic, Underline, Strikethrough, Code, Subscript, Superscript,
 	BlockQuote,
 	CKFinder,
